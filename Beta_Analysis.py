@@ -499,8 +499,7 @@ elif option == 'Performance Moyenne':
     <u>**Interprétation**</u>:<br>
                 <br>
     Avec un Bêta de 1.278, l'action MC.PA est légèrement plus volatile que le marché. 
-                Cela signifie qu'en périodes de hausse ou de baisse du marché, on peut s'attendre à ce que l'action MC.PA augmente ou diminue de façon légèrement plus prononcée que le marché lui-même. 
-                Dans notre cas, 
+                Cela signifie qu'en périodes de hausse ou de baisse du marché, on peut s'attendre à ce que l'action MC.PA augmente ou diminue de façon légèrement plus prononcée que le marché lui-même.
     """, unsafe_allow_html=True)
 
     st.markdown("""Vous l'avez peut-être remarqué, mais le Bêta **"semble incohérent"** ici. Effectivement, dans un monde parfait, le Bêta aurait dû être égal à **5.27**. 
