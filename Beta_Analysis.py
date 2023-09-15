@@ -22,13 +22,26 @@ st.markdown(f"""
             background-color: {backgroundColor};
             color: {textColor};
         }}
-        
+
         section[data-testid="stSidebar"] div[class^="css-"] {{
             background-color: {secondaryBackgroundColor};
             color: {textColor};
         }}
+
+        h1, h2, h3, h4, h5, h6, p, li {{
+            color: {textColor} !important;
+        }}
+
+        header .css-17eq0hr {{
+            background-color: {backgroundColor} !important;
+        }}
+
+        .stChart {{
+            background-color: {backgroundColor} !important;
+        }}
     </style>
 """, unsafe_allow_html=True)
+
 
 
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
