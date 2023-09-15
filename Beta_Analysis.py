@@ -17,31 +17,47 @@ font = "sans serif"
 
 st.markdown(f"""
     <style>
+        /* Application globale */
         .stApp {{
             font-family: {font};
             background-color: {backgroundColor};
             color: {textColor};
         }}
 
+        /* Sidebar */
         section[data-testid="stSidebar"] div[class^="css-"] {{
             background-color: {secondaryBackgroundColor};
             color: {textColor};
         }}
 
+        /* Titres et textes */
         h1, h2, h3, h4, h5, h6, p, li {{
             color: {textColor} !important;
         }}
 
-        header .css-17eq0hr {{
+        /* Header */
+        header .css-17eq0hr, header {{
             background-color: {backgroundColor} !important;
         }}
 
-        .stChart {{
+        /* Chart background */
+        .stChart, .stChart > div {{
+            background-color: {backgroundColor} !important;
+        }}
+
+        /* Lignes du tableau */
+        table tr {{
+            border-color: {textColor} !important;
+        }}
+
+        /* Sélecteurs basés sur l'inspection */
+        div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div > div > div > div, 
+        div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div > div > div > div > pre > div,
+        div.withScreencast > div > div > div > section.main.css-uf99v8.ea3mdgi5 > div.block-container.css-z5fcl4.ea3mdgi4 > div > div > div > div > div {{
             background-color: {backgroundColor} !important;
         }}
     </style>
 """, unsafe_allow_html=True)
-
 
 
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
