@@ -77,7 +77,7 @@ for index, year in enumerate(years):
     data_for_year = data_for_year.sort_values(by='Annual_Performance', ascending=False)
     figs[year] = px.bar(data_for_year, x='Ticker', y='Annual_Performance', color='Annual_Performance',
                         labels={'Annual_Performance': 'P/A (%)'},
-                        color_continuous_scale="earth", width=800) 
+                        color_continuous_scale="earth", width = 1000) 
 
     figs[year].update_layout(
         title={
@@ -106,7 +106,7 @@ for year in years_beta:
     figs_beta[year] = px.bar(data_for_year_beta, x='Ticker', y='Annual_Beta', color='Annual_Beta',
                                 title=f"Beta {year}",
                                 labels={'Annual_Beta': 'Bêta Annuel'},
-                                color_continuous_scale="mint", width=800)
+                                color_continuous_scale="mint", width = 1000)
     
     figs_beta[year].update_layout(title_x=0.1)
     
@@ -136,7 +136,7 @@ fig3 = px.bar(sorted_data, x='Ticker', y='Total_Performance',
              title='Performance Totale des Tickers de 2020 à 2023', 
              color='Total_Performance',
              color_continuous_scale="earth", 
-             width=800)
+             width=1000)
 
 fig3.update_layout(
     title={
@@ -160,7 +160,7 @@ fig4 = px.bar(sorted_beta_data, x='Ticker', y='Annual_Beta',
              title='Performance Moyenne des Bêta de 2020 à 2023', 
              color='Annual_Beta',
              color_continuous_scale="earth", 
-             width=800)
+             width=1000)
 
 fig4.add_shape(
     type="line",
