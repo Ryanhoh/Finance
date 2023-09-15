@@ -9,6 +9,14 @@ from scipy.stats import spearmanr
 px.defaults.template = "plotly"  
 st.set_page_config(layout="wide")
 
+
+#primaryColor="#FF4B4B"
+#backgroundColor="#283650"
+#secondaryBackgroundColor="#505B75"
+#textColor="#F2F2F3"
+#font="sans-serif"
+
+
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
 data_2021_copy = pd.read_csv("data_2021_copy.csv")
 data_2022_copy = pd.read_csv("data_2022_copy.csv")
