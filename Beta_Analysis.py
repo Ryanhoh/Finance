@@ -188,7 +188,7 @@ fig4.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='white', showgri
 
 #----------------------------------------------------------------------------------------
 
-fig5 = px.bar(final_tri_df, x='Date', y='Tri_Performance', color='Tri_Performance', title='Performance Cumulée des ticker', width=1350, color_continuous_scale="Geyser")
+fig5 = px.bar(final_tri_df, x='Date', y='Tri_Performance', color='Tri_Performance', title='Performance Cumulée des ticker', width=1450, color_continuous_scale="Geyser")
 fig5.update_layout(
     title={
         'text': 'Performance Cumulée des ticker',
@@ -203,7 +203,7 @@ fig5.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='lightgray', sho
 
 n_colors = len(final_tri_df['Ticker'].unique())
 colors = px.colors.sample_colorscale("Geyser", n_colors)
-fig6 = px.histogram(final_tri_df, x='Quarterly_Beta', color='Ticker', title='Distribution des Beta par trimestre', width=1300, color_discrete_sequence=colors)
+fig6 = px.histogram(final_tri_df, x='Quarterly_Beta', color='Ticker', title='Distribution des Beta par trimestre', width=1400, color_discrete_sequence=colors)
 fig6.update_layout(
     title={
         'text': 'Distribution des Bêta par trimestre',
@@ -214,7 +214,7 @@ fig6.update_layout(
 )
 fig6.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='lightgray', showgrid=True, gridwidth=1, gridcolor='white')
 
-fig7 = px.histogram(Beta_years, x='Annual_Beta', color='Ticker', title='Distribution des Beta par années', width=1300, color_discrete_sequence=colors)
+fig7 = px.histogram(Beta_years, x='Annual_Beta', color='Ticker', title='Distribution des Beta par années', width=1400, color_discrete_sequence=colors)
 fig7.update_layout(
     title={
         'text': 'Distribution des Bêta par années',
@@ -520,14 +520,14 @@ elif option == 'Performance Moyenne':
                      title='Performance Totale des Tickers de 2020 à 2023', 
                      color='Total_Performance',
                      color_continuous_scale="earth", 
-                     width=1300)
+                     width=1400)
     else:
         sorted_data = sorted_data.sort_values(by='Total_Performance', ascending=False)
         fig3 = px.bar(sorted_data, x='Ticker', y='Total_Performance', 
                      title='Performance Totale des Tickers de 2020 à 2023', 
                      color='Total_Performance',
                      color_continuous_scale="earth", 
-                     width=1300)
+                     width=1400)
 
     fig3.update_layout(coloraxis_showscale=False) 
     fig3.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='white', showgrid=True, gridwidth=1, gridcolor='white') 
@@ -543,14 +543,14 @@ elif option == 'Performance Moyenne':
                      title='Performance Moyenne des Bêta de 2020 à 2023', 
                      color='Annual_Beta',
                      color_continuous_scale="earth", 
-                     width=1300)
+                     width=1400)
     else:
         sorted_beta_data = sorted_beta_data.sort_values(by='Annual_Beta', ascending=False)
         fig4 = px.bar(sorted_beta_data, x='Ticker', y='Annual_Beta', 
                      title='Performance Moyenne des Bêta de 2020 à 2023', 
                      color='Annual_Beta',
                      color_continuous_scale="earth", 
-                     width=1300)
+                     width=1400)
 
     fig4.update_layout(coloraxis_showscale=False) 
     fig4.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='white', showgrid=True, gridwidth=1, gridcolor='white')
@@ -566,8 +566,7 @@ elif option == 'Performance Cumulée et Distribution':
     st.markdown("<h1 style='text-decoration: underline;'>Performance cumulée et distribution des Bêta : 2020-2023</h1>", unsafe_allow_html=True)
 
     st.markdown("""Dans cette section, vous trouverez divers graphiques. Pour mettre en évidence un ticker spécifique, double-cliquez sur son nom dans la légende. 
-                Ensuite, vous pouvez sélectionner manuellement d'autres tickers si vous souhaitez les comparer.<br>
-                Dans le cadre de notre analyse, double-clique sur **MC.PA**.
+                Ensuite, vous pouvez sélectionner manuellement d'autres tickers si vous souhaitez les comparer. Dans le cadre de notre analyse, double-clique sur **MC.PA**.
         """, unsafe_allow_html=True)
     
     st.write()
@@ -599,7 +598,7 @@ elif option == 'Évolution des Bêta':
     for group in groups_of_tickers:
         sub_data = final_tri_df[final_tri_df['Ticker'].isin(group)]
         fig8 = px.scatter(sub_data, x="Date", y="Quarterly_Beta", size="abs_Beta", color="Ticker",
-                          hover_data=['Date'], width=1300, color_discrete_map=custom_color_map_8)
+                          hover_data=['Date'], width=1400, color_discrete_map=custom_color_map_8)
         
         fig8.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='white', showgrid=True, gridwidth=1, gridcolor='white')
     
@@ -661,7 +660,7 @@ elif option == 'Analyse de Corrélation':
         
         fig9 = px.scatter(sub_data, x='Tri_Performance', y='Quarterly_Beta', color='Ticker',
                         size=sub_data["abs_Beta"].abs(),
-                        custom_data=['Date', 'Ticker'], facet_col='Year', width=1300,
+                        custom_data=['Date', 'Ticker'], facet_col='Year', width=1400,
                         color_discrete_map=custom_color_map_9)
         
         fig9.update_traces(
