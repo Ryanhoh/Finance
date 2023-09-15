@@ -7,13 +7,29 @@ from scipy.stats import pearsonr
 from scipy.stats import spearmanr
 
 px.defaults.template = "plotly" 
+st.set_page_config(layout="wide")
 
-st.set_page_config(
-    page_title="",
-    page_icon=":tada:",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
+primaryColor = "#F63366"
+backgroundColor = "#283650"
+secondaryBackgroundColor = "#505B75"
+textColor = "#F1F1F5"
+font = "sans serif"
+
+st.markdown(f"""
+    <style>
+        .stApp {{
+            font-family: {font};
+            background-color: {backgroundColor};
+            color: {textColor};
+        }}
+        
+        section[data-testid="stSidebar"] div[class^="css-"] {{
+            background-color: {secondaryBackgroundColor};
+            color: {textColor};
+        }}
+    </style>
+""", unsafe_allow_html=True)
+
 
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
 data_2021_copy = pd.read_csv("data_2021_copy.csv")
