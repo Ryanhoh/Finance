@@ -11,3 +11,5 @@ headless = true\n\
 enableCORS=false\n\
 port = $PORT\n\
 " > ~/.streamlit/config.toml
+
+echo "STREAMLIT_CONFIG_LOCATION=$PWD" >> ~/.streamlit/config.toml
