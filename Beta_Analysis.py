@@ -6,42 +6,8 @@ import pandas as pd
 from scipy.stats import pearsonr
 from scipy.stats import spearmanr
 
-px.defaults.template = "plotly" 
+px.defaults.template = "plotly"  
 st.set_page_config(layout="wide")
-
-primaryColor = "#F63366"
-backgroundColor = "#283650"
-secondaryBackgroundColor = "#505B75"
-textColor = "#F1F1F5"
-font = "sans serif"
-
-st.markdown(f"""
-    <style>
-        .stApp {{
-            font-family: {font};
-            background-color: {backgroundColor};
-            color: {textColor};
-        }}
-        section[data-testid="stSidebar"] div[class^="css-"] {{
-            background-color: {secondaryBackgroundColor};
-            color: {textColor};
-        }}
-        h1, h2, h3, h4, h5, h6, p, li {{
-            color: {textColor} !important;
-        }}
-        header .css-17eq0hr, header {{
-            background-color: {backgroundColor} !important;
-        }}
-        div.withScreencast div section.main.css-uf99v8.ea3mdgi5 div.block-container.css-z5fcl4.ea3mdgi4 div > div > div > div > div > div,
-        div.withScreencast div section.main.css-uf99v8.ea3mdgi5 div.block-container.css-z5fcl4.ea3mdgi4 div > div > div > div > pre,
-        div.withScreencast div section.main.css-uf99v8.ea3mdgi5 div.block-container.css-z5fcl4.ea3mdgi4 div > div > div > div > pre > div,
-        div.withScreencast div section.main.css-uf99v8.ea3mdgi5 div.block-container.css-z5fcl4.ea3mdgi4 div > div > div > div > div {{
-            background-color: {backgroundColor} !important;
-        }}
-    </style>
-""", unsafe_allow_html=True)
-
-
 
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
 data_2021_copy = pd.read_csv("data_2021_copy.csv")
