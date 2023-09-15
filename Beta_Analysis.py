@@ -1,22 +1,19 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-px.defaults.template = "plotly"
 
 import pandas as pd
 from scipy.stats import pearsonr
 from scipy.stats import spearmanr
-import plotly.graph_objects as go
-import plotly.express as px
-px.defaults.template = "plotly"
 
-st.set_page_config(layout="wide")
-  
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+px.defaults.template = "plotly" 
 
-local_css("styles.css")
+st.set_page_config(
+    page_title="",
+    page_icon=":tada:",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
 data_2021_copy = pd.read_csv("data_2021_copy.csv")
@@ -645,7 +642,7 @@ elif option == 'Analyse de Corrélation':
                         <td>+10.935%</td>
                         <td>-6.597%</td>
                         <td>-11.163%</td>
-                        <td>+11.826%</td>
+                        <td>+11.826%</td> 
                     </tr>
                 </tbody>
             </table>
@@ -773,7 +770,8 @@ elif option == 'Code':
 
     st.markdown("<h1 style='text-decoration: underline;'>Aperçu du Code de l'Analyse</h1>", unsafe_allow_html=True)
 
-    st.write()
+    st.write("")
+    st.write("")
 
     st.write("""<u>**Collecte et Préparation des Données**</u> :""", unsafe_allow_html=True)
 
@@ -815,7 +813,8 @@ elif option == 'Code':
 
     st.code(code1, language='python')
 
-    st.write()
+    st.write("")
+    st.write("")
 
     st.write("""<u>**Analyse du Rendement Annuel par Action et Première Visualisation**</u> :""", unsafe_allow_html=True)
 
@@ -855,7 +854,8 @@ elif option == 'Code':
 
     st.code(code5, language='python')
 
-    st.write()
+    st.write("")
+    st.write("")
 
     st.write("""<u>**Évaluation de la Performance du CAC40**</u> :""", unsafe_allow_html=True)
 
@@ -879,7 +879,8 @@ Resultat :
     """
     st.code(code6, language='python')
 
-    st.write()
+    st.write("")
+    st.write("")
 
     st.write("""<u>**Rendement Composé du CAC40 sur 3,5 Ans**</u> :""", unsafe_allow_html=True)
 
@@ -897,13 +898,4 @@ Résultat : Le rendement composé du CAC40 sur 3,5 ans est d'environ 17.17 %."""
     st.code(code7, language='python')
 
 
-    st.markdown("""
-<style>
-    .reportview-container {
-        background-color: #283650 !important;
-    }
-    .main .block-container {
-        background-color: #34415E !important;
-    }
-</style>
-""", unsafe_allow_html=True)
+
