@@ -14,7 +14,7 @@ st.set_page_config(layout="wide")
 #backgroundColor="#283650"
 #secondaryBackgroundColor="#505B75"
 #textColor="#F2F2F3"
-#font="sans-serif"
+#font="sans serif"
 
 company_name = pd.read_csv("company_name.csv")
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
@@ -374,7 +374,7 @@ if option == 'Sujet':
         <ul style="padding-left:26px;">
             <li>Une période de <strong>3 mois</strong>.</li>
             <li>Une période de <strong>1 an</strong>.</li>
-            <li>Une période de <strong>3,5 ans</strong>.</li>
+            <li>Une période de <strong>3.5 ans</strong>.</li>
         </ul>
         Les Bêta calculés sur une courte période ont <strong>tendance à être plus volatile</strong> et peuvent avoir des valeurs qui semblent <strong>"illogiques"</strong>.<br>
         Ceux-ci peuvent être <strong>influencés</strong> par des événements <strong>temporaires/ponctuels</strong> qui ne reflètent <strong>pas nécessairement</strong> la sensibilité de l'action au long terme.<br>
@@ -388,7 +388,7 @@ elif option == 'Action : Performance Annuelle':
 
     st.markdown("""Nous avons fait le choix de centrer notre étude sur une seule action : **MC.PA (Moët Hennessy Louis Vuitton)**.
                 Nous nous concentrerons donc sur ses performances, ses Bêta, et tenterons de répondre à nos problématiques.
-                La temporalité sélectionnée pour cette étude spécifique sera de 3,5 ans.<br> 
+                La temporalité sélectionnée pour cette étude spécifique sera de 3.5 ans.<br> 
                 <br>
                 Si vous souhaitez suivre cette analyse, rendez-vous à la section **Performance Moyenne.**""", unsafe_allow_html=True)
 
@@ -406,16 +406,18 @@ elif option == 'Action : Performance Annuelle':
     st.markdown("<h3 style='text-decoration: underline;'>Entreprises du CAC40</h3>", unsafe_allow_html=True)
 
     st.write("<br>", unsafe_allow_html=True)
-    
-    num_blocs = 4
-    blocs = [company_name.iloc[i:i+10] for i in range(0, len(company_name), 10)]
-    cols = st.columns(num_blocs)
 
-    for i in range(num_blocs):
+    num_cols = 4  
+    cols = st.columns(num_cols)
+    split_length = len(company_name) // num_cols
+
+    for i in range(num_cols):
+        start_index = i * split_length
+        end_index = (i + 1) * split_length if i != num_cols - 1 else len(company_name)
+        sub_df = company_name[start_index:end_index]
         with cols[i]:
-            for _, row in blocs[i].iterrows():
-                st.write(f"{row['Ticker']} - {row['Entreprise']}")
-
+            for _, row in sub_df.iterrows():
+                st.markdown(f"- **{row['Ticker']}**: {row['Entreprise']}")
 
 #----------------------------------------------------------------------------------------
 
@@ -534,7 +536,7 @@ elif option == 'Performance Cumulée et Distribution':
                 <br>
     Nous allons nous concentrer sur les deux derniers graphiques.<br>
                 <li>Le premier (**distribution des Bêta par trimestres**) nous indique que sur les Bêta des 15 trimestres étudiées,  **11 sont supérieurs à 1.1**. <br>
-                <li>Le deuxième (**distribution des Bêta par années**) nous indique que sur les 3,5 années étudiées, **3 sont supérieurs à 1.3**.<br>
+                <li>Le deuxième (**distribution des Bêta par années**) nous indique que sur les 3.5 années étudiées, **3 sont supérieurs à 1.3**.<br>
                 <br>
                 Ces observations nous indiquent que l'action **MC.PA** est fréquemment plus volatile que le marché et rejoignent nos observations précédentes.<br>
                 Rendez-vous à la section **Analyse de corrélation**.""", unsafe_allow_html=True)
@@ -840,7 +842,7 @@ Resultat :
     st.write("")
     st.write("")
 
-    st.write("""<u>**Rendement Composé du CAC40 sur 3,5 Ans**</u> :""", unsafe_allow_html=True)
+    st.write("""<u>**Rendement Composé du CAC40 sur 3.5 Ans**</u> :""", unsafe_allow_html=True)
 
     code7 ="""def compound_return(*returns):
     total_return = 1
@@ -852,7 +854,7 @@ returns = [-0.0811, 0.2798, -0.1030, 0.1107]
 compound_performance = compound_return(*returns)
 compound_performance
 
-Résultat : Le rendement composé du CAC40 sur 3,5 ans est d'environ 17.17 %."""
+Résultat : Le rendement composé du CAC40 sur 3.5 ans est d'environ 17.17 %."""
     st.code(code7, language='python')
 
 
