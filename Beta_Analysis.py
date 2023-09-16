@@ -6,9 +6,9 @@ import pandas as pd
 from scipy.stats import pearsonr
 from scipy.stats import spearmanr
 
+
 px.defaults.template = "plotly"  
 st.set_page_config(layout="wide")
-
 
 #primaryColor="#FF4B4B"
 #backgroundColor="#283650"
@@ -16,7 +16,7 @@ st.set_page_config(layout="wide")
 #textColor="#F2F2F3"
 #font="sans-serif"
 
-
+company_name = pd.read_csv("company_name.csv")
 data_2020_copy = pd.read_csv("data_2020_copy.csv")
 data_2021_copy = pd.read_csv("data_2021_copy.csv")
 data_2022_copy = pd.read_csv("data_2022_copy.csv")
@@ -70,6 +70,9 @@ groups_of_tickers = [tickers[i:i+10] for i in range(0, len(tickers), 10)]
 
 #----------------------------------------------------------------------------------------
 
+min_value = annual_performance_2['Annual_Performance'].min()
+max_value = annual_performance_2['Annual_Performance'].max()
+
 years = annual_performance_2['Year'].unique()
 figs = {}
 for index, year in enumerate(years):
@@ -77,7 +80,7 @@ for index, year in enumerate(years):
     data_for_year = data_for_year.sort_values(by='Annual_Performance', ascending=False)
     figs[year] = px.bar(data_for_year, x='Ticker', y='Annual_Performance', color='Annual_Performance',
                         labels={'Annual_Performance': 'P/A (%)'},
-                        color_continuous_scale="earth", width = 1000) 
+                        color_continuous_scale="earth", width=1000)
 
     figs[year].update_layout(
         title={
@@ -86,14 +89,19 @@ for index, year in enumerate(years):
             'xanchor': 'center',
             'yanchor': 'top'
         },
-        margin=dict(t=130), 
-        coloraxis_showscale=True if index == 0 else False 
+        margin=dict(t=130),
+        yaxis=dict(range=[min_value, max_value]),  
+        coloraxis_showscale=True if index == 0 else False
     )
     figs[year].update_xaxes(title_text="")
-    figs[year].update_yaxes(title_text="", showgrid=True, gridwidth=2, gridcolor='white', zeroline=True, zerolinewidth=3, zerolinecolor='white', dtick = 20)
+    figs[year].update_yaxes(title_text="", showgrid=True, gridwidth=2, gridcolor='white', zeroline=True, zerolinewidth=3, zerolinecolor='white', dtick=20)
 
 
 #----------------------------------------------------------------------------------------
+
+min_beta = Beta_years['Annual_Beta'].min()
+max_beta = Beta_years['Annual_Beta'].max()
+
 Beta_years['Annual_Beta'] = Beta_years['Annual_Beta'].round(3)
 years_beta = Beta_years['Year'].unique()
 
@@ -106,9 +114,12 @@ for year in years_beta:
     figs_beta[year] = px.bar(data_for_year_beta, x='Ticker', y='Annual_Beta', color='Annual_Beta',
                                 title=f"Beta {year}",
                                 labels={'Annual_Beta': 'Bêta Annuel'},
-                                color_continuous_scale="mint", width = 1000)
+                                color_continuous_scale="mint", width=1000)
     
-    figs_beta[year].update_layout(title_x=0.1)
+    figs_beta[year].update_layout(
+        title_x=0.1,
+        yaxis=dict(range=[min_beta, max_beta])
+    )
     
     if year in [2020, 2021, 2022, 2023]:
         figs_beta[year].update_layout(coloraxis_showscale=False)
@@ -188,7 +199,10 @@ fig4.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='white', showgri
 
 #----------------------------------------------------------------------------------------
 
-fig5 = px.bar(final_tri_df, x='Date', y='Tri_Performance', color='Tri_Performance', title='Performance Cumulée des ticker', width=1450, color_continuous_scale="Geyser")
+n_colors = len(final_tri_df['Ticker'].unique())
+colors = px.colors.sample_colorscale("Geyser", n_colors)
+
+fig5 = px.bar(final_tri_df, x='Date', y='Tri_Performance', color='Ticker', title='Performance Cumulée des ticker', width=1450, color_discrete_sequence=colors)
 fig5.update_layout(
     title={
         'text': 'Performance Cumulée des ticker',
@@ -200,9 +214,6 @@ fig5.update_layout(
 )
 fig5.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='lightgray', showgrid=True, gridwidth=1, gridcolor='white')
 
-
-n_colors = len(final_tri_df['Ticker'].unique())
-colors = px.colors.sample_colorscale("Geyser", n_colors)
 fig6 = px.histogram(final_tri_df, x='Quarterly_Beta', color='Ticker', title='Distribution des Beta par trimestre', width=1400, color_discrete_sequence=colors)
 fig6.update_layout(
     title={
@@ -224,6 +235,7 @@ fig7.update_layout(
     }
 )
 fig7.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='lightgray', showgrid=True, gridwidth=1, gridcolor='white')
+
 
 
 #----------------------------------------------------------------------------------------
@@ -285,7 +297,7 @@ S_coefficient, S_value = spearmanr(final_tri_df['Tri_Performance'], final_tri_df
 
 option = st.sidebar.radio(
     'Choisissez une page:',
-    ('Introduction', 'Action : Performance Annuelle', 'Bêta : Valeur Annuelle', 'Performance Moyenne', 'Performance Cumulée et Distribution', 'Évolution des Bêta', 'Analyse de Corrélation', 'Test Statistique', 'Conclusion', 'Code')
+    ('Sujet', 'Action : Performance Annuelle', 'Bêta : Valeur Annuelle', 'Performance Moyenne', 'Performance Cumulée et Distribution', 'Évolution des Bêta', 'Analyse de Corrélation', 'Test Statistique', 'Conclusion', 'Code')
 )
 
 st.markdown(
@@ -304,7 +316,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-if option == 'Introduction':
+if option == 'Sujet':
     st.markdown("<h2 style='text-decoration: underline;'>Analyse des Bêta et des performances des actions du CAC 40</h2>", unsafe_allow_html=True)
     st.write("")
     st.write("""
@@ -391,70 +403,18 @@ elif option == 'Action : Performance Annuelle':
     st.write(" ")
     st.write(" ")
 
-    st.markdown("<h3 style='text-align: center; text-decoration: underline;'>Entreprises du CAC40</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-decoration: underline;'>Entreprises du CAC40</h3>", unsafe_allow_html=True)
 
     st.write("<br>", unsafe_allow_html=True)
-    st.write("<br>", unsafe_allow_html=True)
+    
+    num_blocs = 4
+    blocs = [company_name.iloc[i:i+10] for i in range(0, len(company_name), 10)]
+    cols = st.columns(num_blocs)
 
-    st.markdown("""
-<table style='width:15%; display:inline-block; margin-left:13%; margin-right:2%'>
-    <tr><th>Ticker</th><th>Entreprise</th></tr>
-    <tr><td>ACA.PA</td><td>Crédit Agricole</td></tr>
-    <tr><td>AI.PA</td><td>Air Liquide</td></tr>
-    <tr><td>AIR.PA</td><td>Airbus</td></tr>
-    <tr><td>ALO.PA</td><td>Alstom</td></tr>
-    <tr><td>BN.PA</td><td>Danone</td></tr>
-    <tr><td>BNP.PA</td><td>BNP Paribas</td></tr>
-    <tr><td>CA.PA</td><td>Carrefour</td></tr>
-    <tr><td>CAP.PA</td><td>Capgemini</td></tr>
-    <tr><td>CS.PA</td><td>AXA</td></tr>
-    <tr><td>DG.PA</td><td>Vinci</td></tr>
-</table>
-
-<table style='width:18%; display:inline-block; margin-right:2%'>
-    <tr><th>Ticker</th><th>Entreprise</th></tr>
-    <tr><td>DSY.PA</td><td>Dassault Systèmes</td></tr>
-    <tr><td>EL.PA</td><td>EssilorLuxottica</td></tr>
-    <tr><td>EN.PA</td><td>Bouygues</td></tr>
-    <tr><td>ENGI.PA</td><td>Engie</td></tr>
-    <tr><td>ERF.PA</td><td>Eurofins Scientific</td></tr>
-    <tr><td>GLE.PA</td><td>Société Générale</td></tr>
-    <tr><td>HO.PA</td><td>Thales</td></tr>
-    <tr><td>KER.PA</td><td>Kering</td></tr>
-    <tr><td>LR.PA</td><td>Legrand</td></tr>
-    <tr><td>MC.PA</td><td>LVMH</td></tr>
-</table>
-
-<table style='width:18%; display:inline-block; margin-right:-1%'>
-    <tr><th>Ticker</th><th>Entreprise</th></tr>
-    <tr><td>ML.PA</td><td>Michelin</td></tr>
-    <tr><td>MT.AS</td><td>ArcelorMittal</td></tr>
-    <tr><td>OR.PA</td><td>L'Oréal</td></tr>
-    <tr><td>ORA.PA</td><td>Orange</td></tr>
-    <tr><td>PUB.PA</td><td>Publicis</td></tr>
-    <tr><td>RI.PA</td><td>Pernod Ricard</td></tr>
-    <tr><td>RMS.PA</td><td>Hermès</td></tr>
-    <tr><td>RNO.PA</td><td>Renault</td></tr>
-    <tr><td>SAF.PA</td><td>Safran</td></tr>
-    <tr><td>SAN.PA</td><td>Sanofi</td></tr>
-</table>
-
-<table style='width:18%; display:inline-block'>
-    <tr><th>Ticker</th><th>Entreprise</th></tr>
-    <tr><td>SGO.PA</td><td>Saint-Gobain</td></tr>
-    <tr><td>STMPA.PA</td><td>STMicroelectronics</td></tr>
-    <tr><td>SU.PA</td><td>Schneider Electric</td></tr>
-    <tr><td>TEP.PA</td><td>Teleperformance</td></tr>
-    <tr><td>TTE.PA</td><td>TotalEnergies</td></tr>
-    <tr><td>VIE.PA</td><td>Veolia</td></tr>
-    <tr><td>VIV.PA</td><td>Vivendi</td></tr>
-    <tr><td>WLN.PA</td><td>Worldline</td></tr>
-    <tr><td>STLAP.PA</td><td>Stellantis</td></tr>
-    <tr><td>URW.PA</td><td>N/A</td></tr>
-</table>
-""", unsafe_allow_html=True)
-
-
+    for i in range(num_blocs):
+        with cols[i]:
+            for _, row in blocs[i].iterrows():
+                st.write(f"{row['Ticker']} - {row['Entreprise']}")
 
 
 #----------------------------------------------------------------------------------------
@@ -471,8 +431,6 @@ elif option == 'Bêta : Valeur Annuelle':
     else:
         col1.plotly_chart(figs_beta[2020], use_container_width=True)
         col2.plotly_chart(figs_beta[2021], use_container_width=True)
-
-    st.write("")
 
     col3, col4 = st.columns(2)
     if sort_by_alpha_beta:
