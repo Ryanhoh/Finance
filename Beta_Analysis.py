@@ -332,8 +332,8 @@ if option == 'Sujet':
 
     st.markdown("""Le bêta est un indicateur qui mesure la volatilité d'une action par rapport à un marché global, souvent représenté par un indice comme le CAC 40. En termes simples, il nous dit comment une action se comporte par rapport au marché :<br>
             <li>**Bêta = 1** : Si le marché augmente de 10%, l'action devrait également augmenter de 10%.</li>
-            <li>**Bêta > 1** : L'action est plus volatile que le marché. Par exemple, avec un bêta de 1,5, si le marché augmente de 10%, l'action pourrait augmenter de 15%.</li>
-            <li>**Bêta < 1** : L'action est moins volatile que le marché. Un bêta de 0,5 pourrait signifier que si le marché augmente de 10%, l'action pourrait augmenter seulement de 5%.</li>
+            <li>**Bêta > 1** : L'action est plus volatile que le marché. Par exemple, avec un bêta de 1.5, si le marché augmente de 10%, l'action pourrait augmenter de 15%.</li>
+            <li>**Bêta < 1** : L'action est moins volatile que le marché. Un bêta de 0.5 pourrait signifier que si le marché augmente de 10%, l'action pourrait augmenter seulement de 5%.</li>
         """, unsafe_allow_html=True)
     
     st.write("")
