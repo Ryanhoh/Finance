@@ -68,6 +68,10 @@ tickers = ['ACA.PA', 'AI.PA', 'AIR.PA', 'ALO.PA', 'BN.PA', 'BNP.PA', 'CA.PA', 'C
 
 groups_of_tickers = [tickers[i:i+10] for i in range(0, len(tickers), 10)]
 
+def custom_markdown(text, unsafe_allow_html=True):
+    text = text.replace("MC.PA", '<span style="color: #FAE6A0;">MC.PA</span>')
+    st.markdown(text, unsafe_allow_html=unsafe_allow_html)
+
 #----------------------------------------------------------------------------------------
 
 min_value = annual_performance_2['Annual_Performance'].min()
@@ -322,7 +326,7 @@ if option == 'Sujet':
     st.markdown("""
     Dans un monde financier en constante évolution, la compréhension des performances des actions et de leur Bêta est devenue cruciale 
     pour les investisseurs, les gestionnaires de portefeuille et les analystes. 
-    <a href="https://www.investopedia.com/terms/b/beta.asp" style="color: red;" target="_blank">Le Bêta</a>, un indicateur de la volatilité 
+    <a href="https://www.investopedia.com/terms/b/beta.asp" style="color: #F57F17;" target="_blank">Le Bêta</a>, un indicateur de la volatilité 
     d'une action par rapport à un indice de marché, est souvent utilisé pour évaluer le risque associé à un 
     investissement particulier. Parallèlement, la performance d'une action est un reflet direct de sa rentabilité. 
     Cependant, existe-t-il une corrélation entre ces deux indicateurs clés ? C'est la question centrale que cette analyse cherche à résoudre.
@@ -372,10 +376,11 @@ if option == 'Sujet':
 elif option == 'Action : Performance Annuelle':
     st.markdown("<h1 style='text-decoration: underline;'>Performance Annuelle par Action</h1>", unsafe_allow_html=True)
 
-    st.markdown("""Nous avons fait le choix de centrer notre étude sur une seule action : **MC.PA (Moët Hennessy Louis Vuitton)**.
-                Nous nous concentrerons donc sur ses performances, ses Bêta, et tenterons de répondre à nos problématiques.
-                La temporalité sélectionnée pour cette étude spécifique sera de 3.5 ans.<br> 
-                <br>
+    st.markdown("""
+    Nous avons fait le choix de centrer notre étude sur une seule action : 
+    <a href="https://www.lvmh.com/investors/investors-and-analysts/publications/?publications=29" style="color:#FAE6A0;">**MC.PA (Moët Hennessy Louis Vuitton)**</a>.
+    Nous nous concentrerons donc sur ses performances, ses Bêta, et tenterons de répondre à nos problématiques.
+    La temporalité sélectionnée pour cette étude spécifique sera de 3.5 ans.<br>
                 Si vous souhaitez suivre cette analyse, rendez-vous à la section **Performance Moyenne.**""", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
@@ -439,7 +444,7 @@ elif option == 'Performance Moyenne':
 
     st.write("")
 
-    st.markdown("""
+    custom_markdown()("""
     <u>**Performances**</u>:
     - Action MC.PA : **+ 90.5%**
     - Marché : **+ 17.17%**
@@ -455,7 +460,7 @@ elif option == 'Performance Moyenne':
                 Sa performance aurait été proportionnellement en ligne avec celle du marché. 
                 Cependant, le Bêta mesure la volatilité relative, pas nécessairement la performance relative.<br>""", unsafe_allow_html=True)
                 
-    st.markdown("""L'action MC.PA, bien qu'ayant fortement surperformé le marché, n'a pas montré une volatilité cinq fois supérieure à celle du marché. 
+    custom_markdown("""L'action MC.PA, bien qu'ayant fortement surperformé le marché, n'a pas montré une volatilité cinq fois supérieure à celle du marché. 
                 Cela suggère que **d'autres facteurs modulent sa volatilité, indépendamment de sa performance**.""", unsafe_allow_html=True)
     
 
@@ -514,13 +519,13 @@ elif option == 'Performance Moyenne':
 elif option == 'Performance Cumulée et Distribution':
     st.markdown("<h1 style='text-decoration: underline;'>Performance cumulée et distribution des Bêta : 2020-2023</h1>", unsafe_allow_html=True)
 
-    st.markdown("""Dans cette section, vous trouverez divers graphiques. Pour mettre en évidence un ticker spécifique, double-cliquez sur son nom dans la légende. 
+    custom_markdown("""Dans cette section, vous trouverez divers graphiques. Pour mettre en évidence un ticker spécifique, double-cliquez sur son nom dans la légende. 
                 Ensuite, vous pouvez sélectionner manuellement d'autres tickers si vous souhaitez les comparer. Dans le cadre de notre analyse, double-clique sur **MC.PA**.
         """, unsafe_allow_html=True)
     
     st.write()
 
-    st.markdown(""" 
+    custom_markdown(""" 
     <u>**Interprétation :**</u><br>
                 <br>
     Nous allons nous concentrer sur les deux derniers graphiques.<br>
@@ -558,11 +563,11 @@ elif option == 'Évolution des Bêta':
 elif option == 'Analyse de Corrélation':
     st.markdown("<h1 style='text-decoration: underline;'>Analyse de corrélation entre les Bêta et les performances trimestrielle par Ticker</h1>", unsafe_allow_html=True)
     st.write()
-    st.markdown("""Double-clique sur **MC.PA** (deuxième graphique)""", unsafe_allow_html=True)
+    custom_markdown("""Double-clique sur **MC.PA** (deuxième graphique)""", unsafe_allow_html=True)
 
     st.write()
 
-    st.markdown("""
+    custom_markdown("""
         <h4><u>Interprétation</u>:</h4>
         <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
             <table style="margin-left: auto; margin-right: auto;">
@@ -698,9 +703,9 @@ elif option == 'Test Statistique':
 elif option == 'Conclusion':
     st.markdown("<h1 style='text-decoration: underline;'>Conclusion</h1>", unsafe_allow_html=True)
 
-    st.markdown("""Après une analyse approfondie des performances et des Bêta des actions du CAC 40 de 2020 à août 2023, avec une attention particulière portée à l'action MC.PA, plusieurs constatations majeures ont émergé.""", unsafe_allow_html=True)
+    custom_markdown("""Après une analyse approfondie des performances et des Bêta des actions du CAC 40 de 2020 à août 2023, avec une attention particulière portée à l'action MC.PA, plusieurs constatations majeures ont émergé.""", unsafe_allow_html=True)
 
-    st.markdown("""Premièrement, bien que le Bêta soit couramment utilisé comme un indicateur de la volatilité relative d'une action vis-à-vis du marché, nos observations suggèrent qu'il ne constitue **pas un prédicteur fiable** de sa **performance à venir**.
+    custom_markdown("""Premièrement, bien que le Bêta soit couramment utilisé comme un indicateur de la volatilité relative d'une action vis-à-vis du marché, nos observations suggèrent qu'il ne constitue **pas un prédicteur fiable** de sa **performance à venir**.
                 Ceci est particulièrement flagrant pour l'action MC.PA : malgré des valeurs de Bêta élevées observées lors de certains trimestres, la performance effective de cette action n'était pas systématiquement en adéquation avec la volatilité attendue.
                 Il convient de souligner que le Bêta est une mesure de la volatilité relative, et non une indication directe de la performance relative. Par exemple, bien que MC.PA ait nettement surpassé le marché, sa volatilité n'a pas systématiquement suivi cette tendance.""", unsafe_allow_html=True)
 
