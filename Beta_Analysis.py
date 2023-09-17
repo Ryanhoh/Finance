@@ -444,7 +444,7 @@ elif option == 'Performance Moyenne':
 
     st.write("")
 
-    custom_markdown()("""
+    custom_markdown("""
     <u>**Performances**</u>:
     - Action MC.PA : **+ 90.5%**
     - Marché : **+ 17.17%**
