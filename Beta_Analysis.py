@@ -61,16 +61,12 @@ final_tri_df['abs_Beta'] = final_tri_df['abs_Beta'].round(2)
 
 Beta_years['Annual_Beta'] = Beta_years['Annual_Beta'].round(3)
 
-
 tickers = ['ACA.PA', 'AI.PA', 'AIR.PA', 'ALO.PA', 'BN.PA', 'BNP.PA', 'CA.PA', 'CAP.PA', 'CS.PA', 'DG.PA', 'DSY.PA', 'EL.PA', 'EN.PA', 'ENGI.PA', 
            'ERF.PA', 'GLE.PA', 'HO.PA', 'KER.PA', 'LR.PA', 'MC.PA', 'ML.PA', 'MT.AS', 'OR.PA', 'ORA.PA', 'PUB.PA', 'RI.PA', 'RMS.PA', 'RNO.PA', 
            'SAF.PA', 'SAN.PA', 'SGO.PA', 'STMPA.PA', 'SU.PA', 'TEP.PA', 'TTE.PA', 'VIE.PA', 'VIV.PA', 'WLN.PA', 'STLAP.PA']
 
 groups_of_tickers = [tickers[i:i+10] for i in range(0, len(tickers), 10)]
 
-def custom_markdown(text, unsafe_allow_html=True):
-    text = text.replace("MC.PA", '<span style="color: #FAE6A0;">MC.PA</span>')
-    st.markdown(text, unsafe_allow_html=unsafe_allow_html)
 
 #----------------------------------------------------------------------------------------
 
@@ -444,7 +440,7 @@ elif option == 'Performance Moyenne':
 
     st.write("")
 
-    custom_markdown("""
+    st.markdown("""
     <u>**Performances**</u>:
     - Action MC.PA : **+ 90.5%**
     - Marché : **+ 17.17%**
@@ -460,7 +456,7 @@ elif option == 'Performance Moyenne':
                 Sa performance aurait été proportionnellement en ligne avec celle du marché. 
                 Cependant, le Bêta mesure la volatilité relative, pas nécessairement la performance relative.<br>""", unsafe_allow_html=True)
                 
-    custom_markdown("""L'action MC.PA, bien qu'ayant fortement surperformé le marché, n'a pas montré une volatilité cinq fois supérieure à celle du marché. 
+    st.markdown("""L'action MC.PA, bien qu'ayant fortement surperformé le marché, n'a pas montré une volatilité cinq fois supérieure à celle du marché. 
                 Cela suggère que **d'autres facteurs modulent sa volatilité, indépendamment de sa performance**.""", unsafe_allow_html=True)
     
 
@@ -519,13 +515,13 @@ elif option == 'Performance Moyenne':
 elif option == 'Performance Cumulée et Distribution':
     st.markdown("<h1 style='text-decoration: underline;'>Performance cumulée et distribution des Bêta : 2020-2023</h1>", unsafe_allow_html=True)
 
-    custom_markdown("""Dans cette section, vous trouverez divers graphiques. Pour mettre en évidence un ticker spécifique, double-cliquez sur son nom dans la légende. 
+    st.markdown("""Dans cette section, vous trouverez divers graphiques. Pour mettre en évidence un ticker spécifique, double-cliquez sur son nom dans la légende. 
                 Ensuite, vous pouvez sélectionner manuellement d'autres tickers si vous souhaitez les comparer. Dans le cadre de notre analyse, double-clique sur **MC.PA**.
         """, unsafe_allow_html=True)
     
     st.write()
 
-    custom_markdown(""" 
+    st.markdown(""" 
     <u>**Interprétation :**</u><br>
                 <br>
     Nous allons nous concentrer sur les deux derniers graphiques.<br>
@@ -563,11 +559,11 @@ elif option == 'Évolution des Bêta':
 elif option == 'Analyse de Corrélation':
     st.markdown("<h1 style='text-decoration: underline;'>Analyse de corrélation entre les Bêta et les performances trimestrielle par Ticker</h1>", unsafe_allow_html=True)
     st.write()
-    custom_markdown("""Double-clique sur **MC.PA** (deuxième graphique)""", unsafe_allow_html=True)
+    st.markdown("""Double-clique sur **MC.PA** (deuxième graphique)""", unsafe_allow_html=True)
 
     st.write()
 
-    custom_markdown("""
+    st.markdown("""
         <h4><u>Interprétation</u>:</h4>
         <div style="text-align: center; margin-top: 20px; margin-bottom: 30px;">
             <table style="margin-left: auto; margin-right: auto;">
@@ -703,9 +699,9 @@ elif option == 'Test Statistique':
 elif option == 'Conclusion':
     st.markdown("<h1 style='text-decoration: underline;'>Conclusion</h1>", unsafe_allow_html=True)
 
-    custom_markdown("""Après une analyse approfondie des performances et des Bêta des actions du CAC 40 de **janvier 2020 à août 2023**, avec une attention particulière portée à l'action MC.PA, plusieurs constatations majeures ont émergé.""", unsafe_allow_html=True)
+    st.markdown("""Après une analyse approfondie des performances et des Bêta des actions du CAC 40 de **janvier 2020 à août 2023**, avec une attention particulière portée à l'action MC.PA, plusieurs constatations majeures ont émergé.""", unsafe_allow_html=True)
 
-    custom_markdown("""Premièrement, bien que le Bêta soit couramment utilisé comme un indicateur de la volatilité relative d'une action vis-à-vis du marché, nos observations suggèrent qu'il ne constitue **pas un prédicteur fiable** de sa **performance à venir**.
+    st.markdown("""Premièrement, bien que le Bêta soit couramment utilisé comme un indicateur de la volatilité relative d'une action vis-à-vis du marché, nos observations suggèrent qu'il ne constitue **pas un prédicteur fiable** de sa **performance à venir**.
                 Ceci est particulièrement flagrant pour l'action MC.PA : malgré des valeurs de Bêta élevées observées lors de certains trimestres, la performance effective de cette action n'était pas systématiquement en adéquation avec la volatilité attendue.
                 Il convient de souligner que le Bêta est une mesure de la volatilité relative, et non une indication directe de la performance relative. Par exemple, bien que MC.PA ait nettement surpassé le marché, sa volatilité n'a pas systématiquement suivi cette tendance.""", unsafe_allow_html=True)
 
