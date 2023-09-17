@@ -337,7 +337,7 @@ if option == 'Sujet':
     st.markdown("<h3 style='text-decoration: underline;'>Objectif</h3>", unsafe_allow_html=True) 
     
     st.markdown("""
-            L'objectif principal de cette analyse est d'examiner en profondeur les performances et les Bêta des actions du CAC 40 de 2020 à août 2023. 
+            L'objectif principal de cette analyse est d'examiner en profondeur les performances et les Bêta des actions du CAC 40 de janvier 2020 à août 2023. 
             Nous cherchons à :
                 <li><strong>Évaluer les performances individuelles</strong> des tickers en termes de <strong>rentabilité</strong>.</li>
                 <li><strong>Analyser le Bêta de chaque ticker</strong> pour comprendre leur <strong>volatilité</strong> par rapport au marché.</li>
@@ -703,7 +703,7 @@ elif option == 'Test Statistique':
 elif option == 'Conclusion':
     st.markdown("<h1 style='text-decoration: underline;'>Conclusion</h1>", unsafe_allow_html=True)
 
-    custom_markdown("""Après une analyse approfondie des performances et des Bêta des actions du CAC 40 de 2020 à août 2023, avec une attention particulière portée à l'action MC.PA, plusieurs constatations majeures ont émergé.""", unsafe_allow_html=True)
+    custom_markdown("""Après une analyse approfondie des performances et des Bêta des actions du CAC 40 de janvier 2020 à août 2023, avec une attention particulière portée à l'action MC.PA, plusieurs constatations majeures ont émergé.""", unsafe_allow_html=True)
 
     custom_markdown("""Premièrement, bien que le Bêta soit couramment utilisé comme un indicateur de la volatilité relative d'une action vis-à-vis du marché, nos observations suggèrent qu'il ne constitue **pas un prédicteur fiable** de sa **performance à venir**.
                 Ceci est particulièrement flagrant pour l'action MC.PA : malgré des valeurs de Bêta élevées observées lors de certains trimestres, la performance effective de cette action n'était pas systématiquement en adéquation avec la volatilité attendue.
