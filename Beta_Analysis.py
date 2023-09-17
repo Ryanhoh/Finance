@@ -241,7 +241,7 @@ fig7.update_yaxes(zeroline=True, zerolinewidth=1, zerolinecolor='lightgray', sho
 #----------------------------------------------------------------------------------------
 
 n_colors_8 = len(final_tri_df['Ticker'].unique())
-palettes_8 = ["Sunset", "Tealgrn"]
+palettes_8 = ["Blues", "Bluered", "Oranges", "Jet", "Purples", "Greens", "YlGnBu"]
 colors_per_palette_8 = n_colors_8 // len(palettes_8)
 geyser_colors_8 = []
 for palette in palettes_8:
@@ -319,29 +319,16 @@ st.markdown(
 if option == 'Sujet':
     st.markdown("<h2 style='text-decoration: underline;'>Analyse des Bêta et des performances des actions du CAC 40</h2>", unsafe_allow_html=True)
     st.write("")
-    st.write("""
+    st.markdown("""
     Dans un monde financier en constante évolution, la compréhension des performances des actions et de leur Bêta est devenue cruciale 
-            pour les investisseurs, les gestionnaires de portefeuille et les analystes. Le Bêta, un indicateur de la volatilité 
-            d'une action par rapport à un indice de marché, est souvent utilisé pour évaluer le risque associé à un 
-            investissement particulier. Parallèlement, la performance d'une action est un reflet direct de sa rentabilité. 
-            Cependant, existe-t-il une corrélation entre ces deux indicateurs clés ? C'est la question centrale que cette analyse cherche à résoudre.""")
+    pour les investisseurs, les gestionnaires de portefeuille et les analystes. 
+    <a href="https://www.investopedia.com/terms/b/beta.asp" style="color: red;" target="_blank">Le Bêta</a>, un indicateur de la volatilité 
+    d'une action par rapport à un indice de marché, est souvent utilisé pour évaluer le risque associé à un 
+    investissement particulier. Parallèlement, la performance d'une action est un reflet direct de sa rentabilité. 
+    Cependant, existe-t-il une corrélation entre ces deux indicateurs clés ? C'est la question centrale que cette analyse cherche à résoudre.
+    """, unsafe_allow_html=True)
 
     st.write("")
-
-    st.markdown("<h3 style='text-decoration: underline;'>Qu'est ce que le Bêta ?</h3>", unsafe_allow_html=True) 
-
-    st.markdown("""Le bêta est un indicateur qui mesure la volatilité d'une action par rapport à un marché global, souvent représenté par un indice comme le CAC 40. En termes simples, il nous dit comment une action se comporte par rapport au marché :<br>
-            <li>**Bêta = 1** : Si le marché augmente de 10%, l'action devrait également augmenter de 10%.</li>
-            <li>**Bêta > 1** : L'action est plus volatile que le marché. Par exemple, avec un bêta de 1.5, si le marché augmente de 10%, l'action pourrait augmenter de 15%.</li>
-            <li>**Bêta < 1** : L'action est moins volatile que le marché. Un bêta de 0.5 pourrait signifier que si le marché augmente de 10%, l'action pourrait augmenter seulement de 5%.</li>
-        """, unsafe_allow_html=True)
-    
-    st.write("")
-
-    st.markdown("""Analyser le bêta aide à comprendre le risque associé à une action. Les investissements dans des actions à bêta 
-                faible tendent à présenter un risque moindre, tandis que les actions à bêta élevé peuvent offrir des rendements 
-                potentiellement supérieurs, mais à un niveau de risque accru.
-                <br> Cependant, il est important de se rappeler que le bêta ne mesure pas la performance relative en termes absolus, mais la volatilité relative.""", unsafe_allow_html=True)
 
     st.markdown("<h3 style='text-decoration: underline;'>Objectif</h3>", unsafe_allow_html=True) 
     
@@ -380,8 +367,7 @@ if option == 'Sujet':
         Ceux-ci peuvent être <strong>influencés</strong> par des événements <strong>temporaires/ponctuels</strong> qui ne reflètent <strong>pas nécessairement</strong> la sensibilité de l'action au long terme.<br>
         Plus un Bêta est calculé sur une <strong>courte temporalité</strong>, plus il sera <strong>sensible aux variations du marché</strong>. Sa valeur peut donc être considérablement affectée.<br>
     """, unsafe_allow_html=True)
-
-
+    
 
 elif option == 'Action : Performance Annuelle':
     st.markdown("<h1 style='text-decoration: underline;'>Performance Annuelle par Action</h1>", unsafe_allow_html=True)
@@ -402,6 +388,9 @@ elif option == 'Action : Performance Annuelle':
 
     st.write(" ")
     st.write(" ")
+
+#--------------------------------------------------------------------------------------------------------------
+
 
     st.markdown("<h3 style='text-decoration: underline;'>Entreprises du CAC40</h3>", unsafe_allow_html=True)
 
