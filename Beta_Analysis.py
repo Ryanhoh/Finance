@@ -326,7 +326,7 @@ if option == 'Sujet':
     st.markdown("""
     Dans un monde financier en constante évolution, la compréhension des performances des actions et de leur Bêta est devenue cruciale 
     pour les investisseurs, les gestionnaires de portefeuille et les analystes. 
-    <a href="https://www.investopedia.com/terms/b/beta.asp" style="color: #F57F17;" target="_blank">Le Bêta</a>, un indicateur de la volatilité 
+    <a href="https://www.investopedia.com/terms/b/beta.asp" style="color: #FFD700 ;" target="_blank">Le Bêta</a>, un indicateur de la volatilité 
     d'une action par rapport à un indice de marché, est souvent utilisé pour évaluer le risque associé à un 
     investissement particulier. Parallèlement, la performance d'une action est un reflet direct de sa rentabilité. 
     Cependant, existe-t-il une corrélation entre ces deux indicateurs clés ? C'est la question centrale que cette analyse cherche à résoudre.
