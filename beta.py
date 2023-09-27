@@ -4,6 +4,7 @@ import streamlit as st
 import plotly.subplots as sp
 import pandas as pd
 import numpy as np
+import datetime 
 from fonctions import render_table
 
 from fonctions import split_data_by_year,calculate_performance, calculate_annual_beta, generate_dual_plot, calculate_beta_over_period, add_annotations_to_bars
@@ -23,6 +24,13 @@ company_name = pd.read_csv("company_name.csv")
 pivot_data = pd.read_csv("pivot_data.csv", parse_dates=['Date'], date_parser=lambda x: pd.datetime.strptime(x, '%Y-%m-%d'), index_col='Date')
 annual_dataframes = split_data_by_year(pivot_data)
 pivot_data = pivot_data.drop(columns=["Date.1"])
+
+pivot_data = pd.read_csv(
+    "pivot_data.csv",
+    parse_dates=['Date'],
+    date_parser=lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'),
+    index_col='Date'
+)
 
 
 performance_2008_to_2012 = calculate_performance(annual_dataframes, 2008, 2012)
