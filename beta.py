@@ -21,16 +21,16 @@ st.set_page_config(layout="wide")
 #font="sans serif"
 
 company_name = pd.read_csv("company_name.csv")
-pivot_data = pd.read_csv("pivot_data.csv", parse_dates=['Date'], date_parser=lambda x: pd.datetime.strptime(x, '%Y-%m-%d'), index_col='Date')
-annual_dataframes = split_data_by_year(pivot_data)
-pivot_data = pivot_data.drop(columns=["Date.1"])
 
 pivot_data = pd.read_csv(
     "pivot_data.csv",
     parse_dates=['Date'],
-    date_parser=lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'),
+    date_parser=lambda x: pd.to_datetime(x, format='%Y-%m-%d'),
     index_col='Date'
 )
+
+annual_dataframes = split_data_by_year(pivot_data)
+pivot_data = pivot_data.drop(columns=["Date.1"])
 
 
 performance_2008_to_2012 = calculate_performance(annual_dataframes, 2008, 2012)
