@@ -393,7 +393,8 @@ st.sidebar.markdown("""
 with st.sidebar:
     st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
 
-    lottie_github = load_lottie_file('C:\\Users\\ouana\\OneDrive\\Documents\\App_Finance\\Anim - Github.json')
+    lottie_github = load_lottie_file('Anim - Github.json')
+
     
     col1, col2 = st.columns([1, 2])
     
@@ -410,7 +411,8 @@ with st.sidebar:
             unsafe_allow_html=True
         )
 
-    lottie_linkedin = load_lottie_file('C:\\Users\\ouana\\OneDrive\\Documents\\App_Finance\\Anim - Link.json')
+    lottie_github = load_lottie_file('Anim - Link.json')
+
     
     col3, col4 = st.columns([1, 2])
     
