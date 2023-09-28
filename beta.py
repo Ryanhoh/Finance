@@ -403,7 +403,7 @@ with st.sidebar:
     with col2:
         st.markdown(
             """
-            <div style="text-align: right; vertical-align: middle; height: 80px; display: flex; align-items: center; justify-content: flex-end; padding-right: 75px;">
+            <div style="text-align: right; vertical-align: middle; height: 80px; display: flex; align-items: center; justify-content: flex-end; padding-right: 85px;">
                 <a href="https://github.com/Ryanhoh/Finance.git" target="_blank" style="text-decoration: none; font-size: 14px;">Ryanh.o.git</a>
             </div>
             """,
