@@ -8,7 +8,7 @@ import datetime
 from fonctions import render_table
 
 from fonctions import split_data_by_year,calculate_performance, calculate_annual_beta, generate_dual_plot, calculate_beta_over_period, add_annotations_to_bars
-from fonctions import _SessionState, get_session_state, beta_histogram_annually, beta_histogram_annually, plot_beta_vs_performance
+from fonctions import _SessionState, get_session_state, beta_histogram_annually, beta_histogram_annually, plot_beta_vs_performance, ticker_to_name
 
 
 px.defaults.template = "plotly"  
@@ -19,6 +19,7 @@ st.set_page_config(layout="wide")
 #secondaryBackgroundColor="#505B75"
 #textColor="#F2F2F3"
 #font="sans serif"
+
 
 company_name = pd.read_csv("company_name.csv")
 
@@ -31,7 +32,6 @@ pivot_data = pd.read_csv(
 
 annual_dataframes = split_data_by_year(pivot_data)
 pivot_data = pivot_data.drop(columns=["Date.1"])
-
 
 performance_2008_to_2012 = calculate_performance(annual_dataframes, 2008, 2012)
 performance_2013_to_2017 = calculate_performance(annual_dataframes, 2013, 2017)
@@ -68,9 +68,9 @@ combined_scale2 = px.colors.sequential.Redor
 combined_scale3 = px.colors.sequential.Mint
 combined_scale4 = px.colors.sequential.Tealgrn 
 
-combined_scale5 = px.colors.diverging.Tealrose + px.colors.diverging.Temps + px.colors.diverging.Tropic
-combined_scale6 = px.colors.sequential.Sunset + px.colors.diverging.Temps + px.colors.diverging.Tropic
-combined_scale7 = px.colors.diverging.Tropic
+combined_scale5 = px.colors.sequential.Teal
+combined_scale6 = px.colors.sequential.Mint 
+combined_scale7 = px.colors.sequential.Darkmint
 combined_scale8 = px.colors.sequential.Tealgrn 
 
 color_scales = [combined_scale1, combined_scale2, combined_scale3, combined_scale4]
@@ -123,40 +123,47 @@ if option == "Sujet":
     st.write("")
 
     st.markdown("<h4 style='text-decoration: underline;'>Problématiques</h4>", unsafe_allow_html=True) 
-             
-    st.markdown("""
-        <style>
-            .big-font {
-                font-weight: bold;
-                font-size: 20px;
-                font-family: Arial;
-            }
-        </style>
-        <div class="big-font">
-            Comment le rendement des actions et leurs bêtas ont-ils évolué de 2008 à aujourd'hui ? 
-            Existe-t-il une relation observable entre ces deux indicateurs ?
-        </div>
-    """, unsafe_allow_html=True)
+    st.write("")
 
-    st.markdown(" ")
+    st.markdown("<h5>Comment le rendement des actions et leurs bêtas ont-ils évolué de 2008 à aujourd'hui ? Existe-t-il une relation observable entre ces deux indicateurs ?</h5>", unsafe_allow_html=True) 
 
     st.markdown("<h4 style='text-decoration: underline;'>Objectifs</h4>", unsafe_allow_html=True) 
+
+    st.write("")
     
     st.markdown("""
             <li><strong>Évaluer les performances individuelles</strong> des entreprises en termes de <strong>rentabilité</strong>.</li>
-            <li><strong>Analyser le Bêta de chaque entreprise.</strong></li><br>
+            <li><strong>Analyser le Bêta de chaque entreprise et examiner sa distribution</strong> au fil de la période analysée.</li>
+            <li><strong>Etudier la relation entre beta et performance</strong></li><br>
         """, unsafe_allow_html=True)
+             
+
+    st.markdown("<h4 style='text-decoration: underline;'>Remarques</h4>", unsafe_allow_html=True) 
 
 
     st.markdown("""
         Le Bêta est généralement calculé sur une période de 5 ans. Nous l'étudierons sur les tranches suivantes : 
-            <ul style="padding-left:26px;">
-                <li><strong>2008 - 2012</strong></li>
-                <li><strong>2013 - 2017</strong></li>
-                <li><strong>2018 - 2023</strong></li>
-                <li><strong>2008 - 2023</strong></li>
-            </ul>
+
+        <table style="margin-left: 26px; border: 1px solid black;">
+            <tr>
+                <th>Temporalité</th>
+            </tr>
+            <tr>
+                <td><strong>2008 - 2012</strong></td>
+            </tr>
+            <tr>
+                <td><strong>2013 - 2017</strong></td>
+            </tr>
+            <tr>
+                <td><strong>2018 - 2023</strong></td>
+            </tr>
+            <tr>
+                <td><strong>2008 - 2023</strong></td>
+            </tr>
+        </table>
     """, unsafe_allow_html=True)
+
+
 
 elif option == 'Analyse des performances':
     st.markdown("<h2 style='text-decoration: underline;'>Performances des actions et des Beta du 01-2008 au 09-2023</h2>", unsafe_allow_html=True)
@@ -249,7 +256,7 @@ elif option == 'Analyse des performances':
 
 if option == "Analyses des tendances":
 
-    annual_hist_all = beta_histogram_annually(annual_betas, color_scale='Geyser')
+    annual_hist_all = beta_histogram_annually(annual_betas, color_scale='Bluyl', show_counts=True)
     annual_hist_sel = beta_histogram_annually(annual_betas, selected_tickers, color_scale='Tealgrn', show_counts=True, custom_title='Beta : Distributions des 6 actions par année')
 
 

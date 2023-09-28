@@ -234,7 +234,6 @@ def get_session_state(**kwargs):
     return session_state
 
 #  -------------------------------------------------    FONCTION   ---------------------------------------------------------
-
 def beta_histogram_annually(betas_annual, tickers_to_filter=None, color_scale="Geyser", show_counts=False, custom_title='Beta : Distribution des 40 actions par année', width=1400):
     df_list = []
 
@@ -256,8 +255,8 @@ def beta_histogram_annually(betas_annual, tickers_to_filter=None, color_scale="G
 
     fig = px.histogram(full_df, x='Beta', color='Company Name', title=custom_title, color_discrete_sequence=colors)
     
-
-    if show_counts:
+    # Si show_counts est True ou si seulement un ticker est filtré
+    if show_counts or (tickers_to_filter and len(tickers_to_filter) == 1):
         fig.update_traces(texttemplate='%{y}', textposition='inside', selector=dict(type='histogram'))
 
     fig.update_layout(
@@ -290,6 +289,7 @@ def beta_histogram_annually(betas_annual, tickers_to_filter=None, color_scale="G
     fig.update_layout(annotations=[source_annotation])
 
     return fig
+
 
 
 #  -------------------------------------------------    FONCTION   ---------------------------------------------------------
@@ -331,20 +331,30 @@ def plot_beta_vs_performance(betas, performances, period, color_scale, width=140
     slope, intercept, _, _, _ = linregress(df['Beta'], df['Performance'])
     x_vals = np.array(df['Beta'])
     y_vals = intercept + slope * x_vals
-    fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode='lines', name='Régression', line=dict(color='red', width=regression_line_width)))
+    fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode='lines', name='Régression', line=dict(color='white', width=regression_line_width)))
+
+    source_annotation = dict(
+        x=1.12, y=-0.2,
+        xref='paper',
+        yref='paper',
+        text='Source : Yahoo Finance',
+        showarrow=False,
+        font=dict(size=10, color="grey"),
+        xanchor='right',
+        yanchor='auto'
+    )
 
     fig.update_layout(
         width=width,
         title_x=0.42,
-        xaxis=dict(tickcolor='white', zeroline=False, linecolor='white', gridcolor='rgba(255, 255, 255, 0.1)', showgrid=True),
-        yaxis=dict(tickcolor='white', zeroline=False, linecolor='white', gridcolor='rgba(255, 255, 255, 0.1)', tickformat='.0%', showgrid=True),
+        xaxis=dict(tickcolor='white', zeroline=False, linecolor='white', gridcolor='rgba(255, 255, 255, 0.03)', showgrid=True),
+        yaxis=dict(tickcolor='white', zeroline=False, linecolor='white', gridcolor='rgba(255, 255, 255, 0.03)', tickformat='.0%', showgrid=True),
+        annotations=[source_annotation]
     )
     
     fig.update_traces(marker=dict(size=marker_size), selector=dict(mode='markers'), hoverinfo='name+x+y')
 
     return fig
-
-
 
 
 
