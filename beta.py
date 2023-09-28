@@ -411,7 +411,7 @@ with st.sidebar:
             unsafe_allow_html=True
         )
 
-    lottie_github = load_lottie_file('Anim - Link.json')
+    lottie_linkedin = load_lottie_file('Anim - Link.json')
 
     
     col3, col4 = st.columns([1, 2])
