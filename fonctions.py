@@ -255,7 +255,6 @@ def beta_histogram_annually(betas_annual, tickers_to_filter=None, color_scale="G
 
     fig = px.histogram(full_df, x='Beta', color='Company Name', title=custom_title, color_discrete_sequence=colors)
     
-    # Si show_counts est True ou si seulement un ticker est filtré
     if show_counts or (tickers_to_filter and len(tickers_to_filter) == 1):
         fig.update_traces(texttemplate='%{y}', textposition='inside', selector=dict(type='histogram'))
 
@@ -316,7 +315,6 @@ def plot_beta_vs_performance(betas, performances, period, color_scale, width=140
     
     df = pd.DataFrame({'Beta': betas, 'Performance': performances})
     
-    # Convertir les tickers en noms d'entreprises
     df['Company Name'] = df.index.map(lambda x: ticker_to_name.get(x, x))
     
     title = f'Corrélation {period}'

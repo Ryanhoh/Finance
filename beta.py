@@ -6,6 +6,8 @@ import pandas as pd
 import numpy as np
 import datetime 
 from fonctions import render_table
+from streamlit_lottie import st_lottie
+import json
 
 from fonctions import split_data_by_year,calculate_performance, calculate_annual_beta, generate_dual_plot, calculate_beta_over_period, add_annotations_to_bars
 from fonctions import _SessionState, get_session_state, beta_histogram_annually, beta_histogram_annually, plot_beta_vs_performance, ticker_to_name
@@ -126,8 +128,6 @@ if option == "Sujet":
     st.write("")
 
     st.markdown("<h5>Comment le rendement des actions et leurs bêtas ont-ils évolué de 2008 à aujourd'hui ? Existe-t-il une relation observable entre ces deux indicateurs ?</h5>", unsafe_allow_html=True) 
-
-    st.markdown("<h4 style='text-decoration: underline;'>Objectifs</h4>", unsafe_allow_html=True) 
 
     st.write("")
     
@@ -375,3 +375,63 @@ if option == "Conclusion":
     Par exemple, bien que Hermes et Danone soient tous deux considérés comme "défensifs", ils affichent des performances très différentes malgré des betas similaires.<br>
     Cette variabilité souligne la complexité intrinsèque de la relation entre le risque (représenté par le beta) et la performance, et suggère que des facteurs spécifiques à chaque entreprise influencent également leurs trajectoires financières.
     """, unsafe_allow_html=True)
+
+    
+
+
+def load_lottie_file(file_path: str):
+    with open(file_path, "r") as file:
+        return json.load(file)
+
+st.sidebar.markdown("""
+    <style>
+        .st-ae { margin-bottom: 20px; }  /* Ajuste l'espace entre les options */
+        .spacer { height: 30vh; }  /* Cette classe est utilisée pour pousser le contenu vers le bas */
+    </style>
+""", unsafe_allow_html=True)
+
+with st.sidebar:
+    st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
+
+    lottie_github = load_lottie_file('C:\\Users\\ouana\\OneDrive\\Documents\\App_Finance\\Anim - Github.json')
+    
+    col1, col2 = st.columns([1, 2])
+    
+    with col1:
+        st_lottie(lottie_github, width=90, height=80, speed=5)
+
+    with col2:
+        st.markdown(
+            """
+            <div style="text-align: right; vertical-align: middle; height: 80px; display: flex; align-items: center; justify-content: flex-end; padding-right: 75px;">
+                <a href="https://github.com/Ryanhoh/Finance.git" target="_blank" style="text-decoration: none; font-size: 14px;">Ryanh.o.git</a>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    lottie_linkedin = load_lottie_file('C:\\Users\\ouana\\OneDrive\\Documents\\App_Finance\\Anim - Link.json')
+    
+    col3, col4 = st.columns([1, 2])
+    
+    with col3:
+        st.markdown('<div style="padding-left:20px;">', unsafe_allow_html=True)
+        st_lottie(lottie_linkedin, width=70, height=60, speed=1)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col4:
+        st.markdown(
+            """
+            <div style="text-align: right; vertical-align: middle; height: 85px; display: flex; align-items: center; justify-content: flex-end; padding-right: 70px;">
+                <a href="https://www.linkedin.com/in/ryan-ouanane/" target="_blank" style="text-decoration: none; font-size: 14px;">Ryan.LinkedIn</a>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+
+
+
+
+
+
