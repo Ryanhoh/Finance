@@ -9,7 +9,7 @@ from fonctions import render_table
 from streamlit_lottie import st_lottie
 import json
 
-from fonctions import split_data_by_year,calculate_performance, calculate_annual_beta, generate_dual_plot, calculate_beta_over_period, add_annotations_to_bars
+from fonctions import split_data_by_year,calculate_performance, calculate_annual_beta, generate_dual_plot, calculate_beta_over_period, add_annotations_to_bars, load_lottie_file
 from fonctions import _SessionState, get_session_state, beta_histogram_annually, beta_histogram_annually, plot_beta_vs_performance, ticker_to_name
 
 
@@ -103,11 +103,12 @@ action_et = {
 }
 
 option = st.sidebar.radio(
-    'Choisissez une page:',
-    ('Sujet', 'Analyse des performances', 'Analyses des tendances', 'Analyse des relations' ,'Conclusion')
+    '',
+    ('Présentation du sujet', 'Analyse des performances', 'Analyses des tendances', 'Analyse des relations' ,'Conclusion')
 )
 
-if option == "Sujet":
+if option == "Présentation du sujet":
+
     st.markdown("<h2 style='text-decoration: underline;'>Analyse des Bêta et des performances des actions du CAC 40</h2>", unsafe_allow_html=True)
     st.write("")
     st.markdown("""
@@ -138,30 +139,38 @@ if option == "Sujet":
         """, unsafe_allow_html=True)
              
 
-    st.markdown("<h4 style='text-decoration: underline;'>Remarques</h4>", unsafe_allow_html=True) 
+    row1_col1, row1_col2 = st.columns([2,1.5])
 
+    with row1_col1:
+        st.markdown("<h4 style='text-decoration: underline;'>Remarques</h4>", unsafe_allow_html=True) 
+        st.markdown("""
+            Le Bêta est généralement calculé sur une période de 5 ans. Nous l'étudierons sur les tranches suivantes : 
+        """, unsafe_allow_html=True)
+        st.markdown("""
+            <table style="margin-left: 26px; border: 1px solid black;">
+                <tr>
+                    <th>Temporalité</th>
+                </tr>
+                <tr>
+                    <td><strong>2008 - 2012</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>2013 - 2017</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>2018 - 2023</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>2008 - 2023</strong></td>
+                </tr>
+            </table>
+        """, unsafe_allow_html=True)
 
-    st.markdown("""
-        Le Bêta est généralement calculé sur une période de 5 ans. Nous l'étudierons sur les tranches suivantes : 
+    with row1_col2:
+        lottie_sujet = load_lottie_file('Anim-sujet.json')
+        st_lottie(lottie_sujet, width=400, height=350, speed=0.5)
 
-        <table style="margin-left: 26px; border: 1px solid black;">
-            <tr>
-                <th>Temporalité</th>
-            </tr>
-            <tr>
-                <td><strong>2008 - 2012</strong></td>
-            </tr>
-            <tr>
-                <td><strong>2013 - 2017</strong></td>
-            </tr>
-            <tr>
-                <td><strong>2018 - 2023</strong></td>
-            </tr>
-            <tr>
-                <td><strong>2008 - 2023</strong></td>
-            </tr>
-        </table>
-    """, unsafe_allow_html=True)
+    row2_col1, row2_col2 = st.columns([2,1])
 
 
 
@@ -376,30 +385,30 @@ if option == "Conclusion":
     Cette variabilité souligne la complexité intrinsèque de la relation entre le risque (représenté par le beta) et la performance, et suggère que des facteurs spécifiques à chaque entreprise influencent également leurs trajectoires financières.
     """, unsafe_allow_html=True)
 
-    
+    st.write("")
 
+    lottie_conclusion = load_lottie_file('Anim-conclusion.json')
+    st_lottie(lottie_conclusion, width=1250, height=500, speed=1)
 
-def load_lottie_file(file_path: str):
-    with open(file_path, "r") as file:
-        return json.load(file)
 
 st.sidebar.markdown("""
     <style>
-        .st-ae { margin-bottom: 20px; }  /* Ajuste l'espace entre les options */
-        .spacer { height: 30vh; }  /* Cette classe est utilisée pour pousser le contenu vers le bas */
+        .st-ae { margin-bottom: 30px; } 
+        .spacer { height: 25vh; }  
     </style>
 """, unsafe_allow_html=True)
 
 with st.sidebar:
     st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="margin-top:10px;"></div>', unsafe_allow_html=True)
+
 
     lottie_github = load_lottie_file('Anim - Github.json')
-
     
     col1, col2 = st.columns([1, 2])
     
     with col1:
-        st_lottie(lottie_github, width=90, height=80, speed=5)
+        st_lottie(lottie_github, width=84, height=75, speed=1)
 
     with col2:
         st.markdown(
@@ -413,11 +422,10 @@ with st.sidebar:
 
     lottie_linkedin = load_lottie_file('Anim - Link.json')
 
-    
     col3, col4 = st.columns([1, 2])
     
     with col3:
-        st.markdown('<div style="padding-left:20px;">', unsafe_allow_html=True)
+        st.markdown('<div style="padding-left:2px;">', unsafe_allow_html=True)
         st_lottie(lottie_linkedin, width=70, height=60, speed=1)
         st.markdown('</div>', unsafe_allow_html=True)
 

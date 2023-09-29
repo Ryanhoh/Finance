@@ -4,6 +4,7 @@ import streamlit as st
 import plotly.subplots as sp
 import pandas as pd
 import numpy as np
+import json
 
 from scipy.stats import pearsonr
 from scipy.stats import spearmanr
@@ -355,6 +356,9 @@ def plot_beta_vs_performance(betas, performances, period, color_scale, width=140
     return fig
 
 
+def load_lottie_file(file_path: str):
+    with open(file_path, "r") as file:
+        return json.load(file)
 
 
 
