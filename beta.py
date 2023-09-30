@@ -393,14 +393,21 @@ if option == "Conclusion":
 
 st.sidebar.markdown("""
     <style>
-        .st-ae { margin-bottom: 30px; } 
-        .spacer { height: 25vh; }  
+        .st-ae { margin-bottom: 20px; } 
+        .st-dr { margin-bottom: -10px; }  
+        }
+        .bottom-elements {
+            position: absolute; 
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 """, unsafe_allow_html=True)
 
 with st.sidebar:
+    st.markdown('<div style="height:250px;"></div>', unsafe_allow_html=True)
     st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
-    st.markdown('<div style="margin-top:10px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
 
 
     lottie_github = load_lottie_file('Anim - Github.json')
@@ -438,6 +445,10 @@ with st.sidebar:
             """,
             unsafe_allow_html=True
         )
+
+    st.markdown('</div>', unsafe_allow_html=True) 
+
+
 
 
 
